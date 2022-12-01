@@ -1,0 +1,87 @@
+<androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/otpLayout"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/logoImageView2"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.19999999"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <com.chaos.view.PinView
+            style="@style/PinWidget.PinView"
+            android:cursorVisible="true"
+            android:digits="0123456789"
+            android:id="@+id/otpVerification"
+            android:inputType="number"
+            android:itemBackground="@color/blue_bg"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_20"
+            android:layout_marginVertical="16dp"
+            android:layout_width="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:cursorColor="@color/white"
+            app:cursorWidth="2dp"
+            app:hideLineWhenFilled="false"
+            app:itemCount="6"
+            app:itemHeight="48dp"
+            app:itemRadius="4dp"
+            app:itemSpacing="8dp"
+            app:itemWidth="48dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:lineColor="@color/blue_bg"
+            app:lineWidth="1dp"
+            app:viewType="rectangle" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/otp_error_message_text"
+            style="@style/error_message_text_style"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@id/otpVerification"
+            app:layout_constraintEnd_toStartOf="@id/resendTextview"
+            app:layout_constraintTop_toBottomOf="@id/otpVerification"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/resendOTPStyle"
+            android:id="@+id/resendTextview"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="@string/resend_otp"
+            android:clickable="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/otpVerification"
+            android:focusable="true" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            style="@style/nextButtonStyle"
+            android:id="@+id/submitButton"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="@string/submit_cc"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.90999997" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
