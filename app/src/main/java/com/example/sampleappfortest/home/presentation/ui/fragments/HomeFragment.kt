@@ -105,6 +105,14 @@ class HomeFragment : DaggerFragment(), NewsItemClickListener {
 
 
     private fun initObserver() {
+        mHomeBinding?.newsListLayout?.apply {
+            setOnRefreshListener {
+                //refresh the data
+                mHomeViewModel.pullData(true)
+                isRefreshing=false
+
+            }
+        }
         mHomeViewModel.viewEvent.observe(viewLifecycleOwner) {
             handleViewEvents(it)
         }

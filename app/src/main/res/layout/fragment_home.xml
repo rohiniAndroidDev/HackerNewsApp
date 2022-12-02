@@ -62,18 +62,30 @@
         app:layout_constraintStart_toEndOf="@id/guidelineStart"
         app:layout_constraintTop_toBottomOf="@id/homeToolbar" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/assignmentList"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="50dp"
         android:background="@color/white"
+        android:id="@+id/newsListLayout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/guidelineEnd"
         app:layout_constraintStart_toEndOf="@id/guidelineStart"
         app:layout_constraintTop_toBottomOf="@id/todayAssignmentTextView"
-        app:layout_constraintVertical_bias="0.0"
-        tools:listitem="@layout/assignment_list_item" />
+        app:layout_constraintVertical_bias="0.0">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/assignmentList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/guidelineEnd"
+            app:layout_constraintStart_toEndOf="@id/guidelineStart"
+            app:layout_constraintTop_toBottomOf="@id/todayAssignmentTextView"
+            app:layout_constraintVertical_bias="0.0"
+            tools:listitem="@layout/assignment_list_item" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
 
     <androidx.appcompat.widget.AppCompatTextView
