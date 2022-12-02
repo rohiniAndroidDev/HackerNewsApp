@@ -4,10 +4,10 @@ import com.google.gson.annotations.SerializedName
 
 
 data class ProfileDetails (
-    val createdAt: String,
-    val name: String,
-    val avatar: String,
-    val lastname: String,
-    val email: String,
-    val id: String
+    val about: String,
+    val created: Long,
+    val delay: Long,
+    val id: String,
+    val karma: Long,
+    val submitted: List<Long>
 )

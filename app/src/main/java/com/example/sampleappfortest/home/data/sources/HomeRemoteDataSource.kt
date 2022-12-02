@@ -11,7 +11,6 @@ import retrofit2.http.Path
 
 interface HomeRemoteDataSource {
     suspend fun getProfile(): ProfileDetails
-    suspend fun getImages(): List<ImageDetails>
 
     /*news related functions*/
     suspend fun getTopNewsStoriesItemIds(): ApiResult<IdsResponse>

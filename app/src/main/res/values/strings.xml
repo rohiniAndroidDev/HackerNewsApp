@@ -59,7 +59,9 @@
     <string name="search_news_here">Search news here</string>
     <string name="continue_cc">Continue</string>
     <string name="recent_suggestion_cc">Recent Search History</string>
-
+    <string name="user_id_cc">User Id</string>
+    <string name="published_news_cc">Published News</string>
+    <string name="about_cc">About</string>
 
 
 </resources>

@@ -11,8 +11,8 @@ import retrofit2.http.Path
 
 interface HomeService {
 
-    @GET("User")
-    fun getProfile(): Deferred<Response<ProfileDetails>>
+    @GET("user/{id}.json")
+    fun getProfile(@Path("id") id: String="jl"): Deferred<Response<ProfileDetails>>
 
     @GET("images")
     fun getImages(): Deferred<Response<List<ImageDetails>>>

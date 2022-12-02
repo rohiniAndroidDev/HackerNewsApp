@@ -38,9 +38,9 @@ class ListConverter {
     @TypeConverter
     fun arrayListTypeFromString(list: String?): ArrayList<IdModel> {
         if (list == null) return arrayListOf()
-        val TypeListType: Type = object : TypeToken<ArrayList<IdModel?>?>() {}.type
+        val mTypeListType: Type = object : TypeToken<ArrayList<IdModel?>?>() {}.type
 
-        return GsonInstance.instance().fromJson(list, TypeListType) as ArrayList<IdModel>
+        return GsonInstance.instance().fromJson(list, mTypeListType) as ArrayList<IdModel>
     }
 
     @TypeConverter

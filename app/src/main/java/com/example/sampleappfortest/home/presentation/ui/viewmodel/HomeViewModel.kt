@@ -22,16 +22,6 @@ class HomeViewModel @Inject constructor(private val mHomeUserCase: HomeUseCase) 
             }
         }
     }
-    val newsIDsResult =
-        MediatorLiveData<Event<com.example.sampleappfortest.common.Result<IdsResponse>>>()
-
-    /*fun getNewsIds() {
-        viewModelScope.launch {
-            newsIDsResult.addSource(mHomeUserCase.getTopNewsStoriesItemIds()) {
-                newsIDsResult.value = Event(it)
-            }
-        }
-    }*/
     val newsResult = MediatorLiveData<Event<com.example.sampleappfortest.common.Result<List<NewsItem>>>>()
 
 
@@ -43,18 +33,7 @@ class HomeViewModel @Inject constructor(private val mHomeUserCase: HomeUseCase) 
         }
     }
 
-    val getCategoryResult =
-        MediatorLiveData<Event<com.example.sampleappfortest.common.Result<List<ImageDetails>>>>()
 
-    fun getImages() {
-        viewModelScope.launch {
-            getCategoryResult.addSource(mHomeUserCase.getImages())
-            {
-                getCategoryResult.value = Event(it)
-
-            }
-        }
-    }
     fun getPaginatedFlow(idsList: List<Int>) = mHomeUserCase.invoke(idsList)
 
     fun pullData(isRetry:Boolean) {

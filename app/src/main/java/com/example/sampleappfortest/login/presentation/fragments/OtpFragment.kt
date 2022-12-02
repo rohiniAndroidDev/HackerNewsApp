@@ -122,9 +122,7 @@ class OtpFragment : DaggerFragment() {
             it.getContentIfNotHandled()?.let {
                 loginObserver(it)
             }
-            it.peekContent().let {
-                loginObserver(it)
-            }
+            loginObserver(it.peekContent())
 
         }
         mLoginViewModel.resentOTPResult.observe(viewLifecycleOwner) {

@@ -1,14 +1,11 @@
 package com.example.sampleappfortest.home.data.repository
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import androidx.paging.RemoteMediator
 import com.example.sampleappfortest.common.*
-import com.example.sampleappfortest.home.data.network.ResponseWrapper
 import com.example.sampleappfortest.home.data.sources.HomeLocalDataSource
 import com.example.sampleappfortest.home.data.sources.HomeRemoteDataSource
 import com.example.sampleappfortest.home.model.*
@@ -16,16 +13,18 @@ import com.example.sampleappfortest.home.presentation.ui.paging.NewsPagingSource
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class HomeRepositoryImpl @Inject constructor(var mRemoteDataSource: HomeRemoteDataSource,var mLocalDataSource: HomeLocalDataSource) :
+class HomeRepositoryImpl @Inject constructor(
+    var mRemoteDataSource: HomeRemoteDataSource,
+    var mLocalDataSource: HomeLocalDataSource
+) :
     HomeRepository {
-    val idsList = IdsResponse()
 
     override fun getProfile(): LiveData<com.example.sampleappfortest.common.Result<ProfileDetails>> {
         return liveData {
             emit(com.example.sampleappfortest.common.Result.loading())
             try {
                 val response = mRemoteDataSource.getProfile()
-                emit(com.example.sampleappfortest.common.Result.success(response))
+                emit(Result.success(response))
 
             } catch (exception: Exception) {
                 emit(
@@ -38,23 +37,6 @@ class HomeRepositoryImpl @Inject constructor(var mRemoteDataSource: HomeRemoteDa
         }
     }
 
-    override fun getImages(): LiveData<Result<List<ImageDetails>>> {
-        return liveData {
-            emit(com.example.sampleappfortest.common.Result.loading())
-            try {
-                val response = mRemoteDataSource.getImages()
-                emit(com.example.sampleappfortest.common.Result.success(response))
-
-            } catch (exception: Exception) {
-                emit(
-                    com.example.sampleappfortest.common.Result.error(
-                        exception.message ?: "",
-                        null
-                    )
-                )
-            }
-        }
-    }
 
     override suspend fun getNewsStoriesItemIds(isRetry: Boolean): ApiResult<List<Int>> {
         val networkResponse = if (AppCache.canFetch("Top")) {
@@ -75,7 +57,7 @@ class HomeRepositoryImpl @Inject constructor(var mRemoteDataSource: HomeRemoteDa
             val currentTimestamp = System.currentTimeMillis()
             for (i in networkResponse.result) {
                 idsList.add(i)
-                list.add(IdModel(i,  currentTimestamp))
+                list.add(IdModel(i, currentTimestamp))
             }
             storeIdsInDb(list)
             return ApiResult.OK(networkResponse.message, idsList)
@@ -89,37 +71,33 @@ class HomeRepositoryImpl @Inject constructor(var mRemoteDataSource: HomeRemoteDa
     }
 
 
-
-
-
-
     override suspend fun getItemFromIds(): LiveData<Result<List<NewsItem>>> {
         return liveData {
             emit(com.example.sampleappfortest.common.Result.loading())
             try {
-                var responseList= mutableListOf<NewsItem>()
+                var responseList = mutableListOf<NewsItem>()
 
 //                todo need to fix this
-                   /* val newslist=fetchItemByIdFromLocalDb().toMutableList()
-                    newslist?.forEach {
-                        responseList.add(it)
-                    }*/
+                /* val newslist=fetchItemByIdFromLocalDb().toMutableList()
+                 newslist?.forEach {
+                     responseList.add(it)
+                 }*/
                 //now search only works for 20 items
-                    if(responseList.isEmpty()) {
-                        val localResponse: List<IdModel> = fetchIdsFromDb()
+                if (responseList.isEmpty()) {
+                    val localResponse: List<IdModel> = fetchIdsFromDb()
 
-                        val idsList = IdsResponse()
+                    val idsList = IdsResponse()
 
-                        localResponse.forEach { item ->
-                            idsList.add(item.id)
-                        }
-                        for (i in idsList.take(20)) {
-                            val response = mRemoteDataSource.getItemForId(i)
-                            storeItemInDb(response)
-                            responseList.add(response)
-                        }
+                    localResponse.forEach { item ->
+                        idsList.add(item.id)
                     }
-                    emit(com.example.sampleappfortest.common.Result.success(responseList))
+                    for (i in idsList.take(20)) {
+                        val response = mRemoteDataSource.getItemForId(i)
+                        storeItemInDb(response)
+                        responseList.add(response)
+                    }
+                }
+                emit(com.example.sampleappfortest.common.Result.success(responseList))
 
 
             } catch (exception: Exception) {
@@ -133,7 +111,7 @@ class HomeRepositoryImpl @Inject constructor(var mRemoteDataSource: HomeRemoteDa
         }
     }
 
-    override suspend fun getItemFromId(id: Int):  ApiResult<NewsItem> {
+    override suspend fun getItemFromId(id: Int): ApiResult<NewsItem> {
 //            emit(com.example.sampleappfortest.common.Result.loading())
         val fromLocal = getNewsByID(id)
         if (fromLocal != null) {
@@ -145,7 +123,7 @@ class HomeRepositoryImpl @Inject constructor(var mRemoteDataSource: HomeRemoteDa
             storeItemInDb(fromNetwork.result!!)
 
         return fromNetwork
-        }
+    }
 
 
     override suspend fun storeIdsInDb(list: List<IdModel>) {
@@ -179,7 +157,7 @@ class HomeRepositoryImpl @Inject constructor(var mRemoteDataSource: HomeRemoteDa
     }
 
     override suspend fun getNewsByID(id: Int): NewsItem? {
-      return mLocalDataSource.getNewsById(id)
+        return mLocalDataSource.getNewsById(id)
     }
 
 }

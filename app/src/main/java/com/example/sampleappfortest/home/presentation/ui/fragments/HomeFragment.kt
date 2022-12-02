@@ -37,14 +37,11 @@ class HomeFragment : DaggerFragment(), NewsItemClickListener {
 
     private var uploadedImagesAdapter: UploadedImagesAdapter? = null
     private lateinit var uploadedNewsAdapter: NewsListAdapter
-    private val ASSIGNMENTDATA: String? = "AssignmentData"
 
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
     private lateinit var mHomeViewModel: HomeViewModel
-    var technicianID = ""
-    var technicianName = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
