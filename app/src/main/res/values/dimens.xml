@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="normal_margin">8dp</dimen>
+    <dimen name="internet_msg_txt_size">16sp</dimen>
+    <dimen name="normal_padding">8dp</dimen>
+    <dimen name="imageview_width">110dp</dimen>
+    <dimen name="imageview_height">100dp</dimen>
+    <dimen name="min_padding">5dp</dimen>
+    <dimen name="imageHeight">35dp</dimen>
+    <dimen name="imageWidth">30dp</dimen>
+    <dimen name="radious_bg">15dp</dimen>
+    <dimen name="min_margin">5dp</dimen>
+    <dimen name="default_textsize">15sp</dimen>
+    <dimen name="max_padding">32dp</dimen>
+    <dimen name="bottomsheet_roundradius">12dp</dimen>
+
+    <dimen name="button_min_width">150dp</dimen>
+    <dimen name="padding_20">20dp</dimen>
+    <dimen name="margin_20">20dp</dimen>
+    <dimen name="padding_10">10dp</dimen>
+    <dimen name="padding_5">5dp</dimen>
+    <dimen name="margin_5">5dp</dimen>
+    <dimen name="margin_2">2dp</dimen>
+    <dimen name="dimen_45dp">45dp</dimen>
+    <dimen name="dimen_10dp">10dp</dimen>
+    <dimen name="dimen_5dp">5dp</dimen>
+    <dimen name="dimen_60dp">60dp</dimen>
+    <dimen name="dimen_15dp">15dp</dimen>
+    <dimen name="dimen_80dp">80dp</dimen>
+    <dimen name="dimen_20dp">20dp</dimen>
+    <dimen name="dimen_1dp">1dp</dimen>
+    <dimen name="dimen_0dp">0dp</dimen>
+    <dimen name="dimen_2dp">2dp</dimen>
+    <dimen name="dimen_12sp">12sp</dimen>
+    <dimen name="dimen_40dp">40dp</dimen>
+    <dimen name="_10dp">10dp</dimen>
+
+</resources>

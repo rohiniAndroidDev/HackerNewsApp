@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="default_status_displaytext">
+        <item>@string/all</item>
+        <item>@string/veg_fruits</item>
+        <item>@string/non_veg_fruits</item>
+    </string-array>
+
+</resources>

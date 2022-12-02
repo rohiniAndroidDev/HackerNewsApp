@@ -1,0 +1,56 @@
+<resources>
+    <string name="noInternet">Please check your internet connection!!</string>
+    <string name="search_hint_text">Search </string>
+    <string name="no_item">No item found!</string>
+    <string name="all">All</string>
+    <string name="veg_fruits"><![CDATA[Veg&Fruits]]></string>
+    <string name="non_veg_fruits">Others</string>
+    <string name="enter_">Enter product details</string>
+    <string name="done">Done</string>
+    <string name="app_name">SampleAppForTest</string>
+    <string name="username_cc">Username</string>
+    <string name="mobile_cc">Mobile Number</string>
+    <string name="next_cc">Next</string>
+    <string name="resend_otp">Resend</string>
+    <string name="submit_cc">Submit</string>
+    <string name="loading">loading</string>
+    <string name="error_message">Something went wrong,please try again!</string>
+    <string name="otp_success">OTP Sent Successfully</string>
+
+    <string name="phone_no_error_info">Phone number should be 10 digits</string>
+    <string name="ok_cc">OK</string>
+
+    <string name="mobile_number_error">Please enter a vaild mobile number</string>
+    <string name="invaild_values_error">Please enter the vaild details</string>
+    <string name="email_error">Please enter the vaild franchise code</string>
+
+    <string name="home_cc">Home</string>
+    <string name="wallet_cc">Wallet</string>
+    <string name="assignments_cc">Assignments</string>
+    <string name="profile">Profile</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="email">Email</string>
+    <string name="work_station">Work Station</string>
+    <string name="phone">Phone</string>
+    <string name="name_hint">Name</string>
+    <string name="edit_profile">Upload / Change Picture</string>
+    <string name="global_id_hint">Unique Id / Employee Id</string>
+    <string name="profile_title">Profile</string>
+    <string name="business_number_text">Business Mobile Number</string>
+    <string name="lastname">last name</string>
+    <string name="alert">Alert</string>
+    <string name="exit_alert">Are you sure you want to exit from application ?</string>
+    <string name="exit_yes">Yes</string>
+    <string name="exit_no">No</string>
+    <string name="not_implemented">Not implemented yet</string>
+    <string name="search_cc">Search</string>
+    <string name="no_data_available">No data available</string>
+    <string name="list_of_items">Images list</string>
+
+    <string name="unable_to_load_data">Unable to load data</string>
+    <string name="retry">Retry</string>
+    <string name="TopStories_cc">Top Stories</string>
+
+</resources>

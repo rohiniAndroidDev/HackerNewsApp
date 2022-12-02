@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="dm_list_txt_color">#9C27B0</color>
+<!--    product list item screen-->
+    <color name="card_bg">#F9F9F9</color>
+    <color name="transparent">#00000000</color>
+    <color name="search_text_hint_color">#BEC8D8</color>
+
+    <color name="blue_bg">#26659E</color>
+    <color name="orange_bg_color">#FF7F00</color>
+    <!--otp screen-->
+    <color name="actionError">#ED1D2C</color>
+    <color name="white_alpha">#80FFFFFF</color>
+    <color name="colorRed">#ff4646</color>
+    <color name="colorRedDark">#A7261D</color>
+
+    <color name="menu_inactive_color">#AAAAAA</color>
+    <color name="menu_active_color">#124573</color>
+    <color name="ColorGrayShade9">#DFE1DF</color>
+
+    <color name="title_text_color">#333333</color>
+    <color name="date_time_color">#376AED</color>
+    <color name="default_text_color">#070A28</color>
+    <color name="ColorGrayShade11">#f4f4f4</color>
+    <color name="ColorGrayShade15">#969696</color>
+    <color name="colorGrayShade2">#f9f9f9</color>
+    <color name="colorGrayShade3">#747272</color>
+    <color name="ColorBlueShade3">#041e5a</color>
+
+
+
+</resources>
