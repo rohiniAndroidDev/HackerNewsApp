@@ -15,7 +15,7 @@ class LoginLocalDataSourceImpl @Inject constructor(
     @IO private val context: CoroutineContext
 ) : LoginLocalDataSource {
     override suspend fun login(loginDetails: LoginDetails): LoginResponse = withContext(context) {
-        val isExists = loginDetails.username?.let { loginDao.isExists(it) }
+        val isExists = loginDetails.username.let { loginDao.isExists(it) }
         if(isExists == true)
         {
             LoginResponse(status = "Success",200,"OTP Send Successfully")

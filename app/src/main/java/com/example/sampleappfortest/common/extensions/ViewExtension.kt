@@ -52,7 +52,7 @@ fun View.disable() {
     this.isEnabled = false
 }
 
-public inline var View.isvisible: Boolean
+inline var View.isvisible: Boolean
     get() = visibility == View.VISIBLE
     set(value) {
         visibility = if (value) View.VISIBLE else View.GONE

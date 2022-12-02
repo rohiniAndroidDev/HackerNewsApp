@@ -10,6 +10,8 @@ import com.example.sampleappfortest.R
 import com.example.sampleappfortest.databinding.AssignmentListItemBinding
 import com.example.sampleappfortest.home.model.NewsItem
 import com.example.sampleappfortest.util.AppDateUtil
+import java.util.*
+import kotlin.collections.ArrayList
 
 class SearchNewsAdapter :
 
@@ -89,7 +91,7 @@ class SearchNewsAdapter :
                 val filterList: MutableList<NewsItem> = ArrayList()
                 for (i in 0 until mStringFilterList.size) {
                     if (mStringFilterList[i].title?.uppercase()
-                            ?.contains(constraint.toString().toUpperCase()) == true
+                            ?.contains(constraint.toString().uppercase(Locale.getDefault())) == true
                     ) {
                         filterList.add(mStringFilterList[i])
                     }

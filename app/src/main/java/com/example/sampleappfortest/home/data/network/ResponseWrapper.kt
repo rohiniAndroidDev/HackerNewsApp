@@ -24,7 +24,7 @@ sealed class ResponseWrapper<out T> {
             try {
                 val res = apiCall.invoke()
                 res as retrofit2.Response<*>
-                Log.d("sahdhsagdhjag77", res?.isSuccessful.toString())
+                Log.d("sahdhsagdhjag77", res.isSuccessful.toString())
                 response = if (res.isSuccessful) {
                     Success(res)
                 } else {

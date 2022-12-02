@@ -82,7 +82,7 @@ class HomeRemoteDataSourceImpl @Inject constructor(
     override suspend fun getTopNewsStoriesItemIdsApiCall(): ResponseWrapper<IdsResponse> {
         return ResponseWrapper.safeApiCall {
             val response = service.getTopNewsStoriesItemIds().await()
-            Log.d("sahdhsagdhjag", response?.isSuccessful.toString())
+            Log.d("sahdhsagdhjag", response.isSuccessful.toString())
 
             when {
                 response.isSuccessful -> {
@@ -106,7 +106,7 @@ class HomeRemoteDataSourceImpl @Inject constructor(
     override suspend fun getItemFromIdApiCall(id:Int): ResponseWrapper<NewsItem?> {
         return ResponseWrapper.safeApiCall {
             val response = service.getItemFromId(id)
-            Log.d("sahdhsagdhjag12", response?.toString())
+            Log.d("sahdhsagdhjag12", response.toString())
             when {
                 response.isSuccessful -> {
                     response.body()

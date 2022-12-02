@@ -147,11 +147,11 @@ class ProfileFragment : DaggerFragment() {
     }
 
     private fun handleProfileValues(profileDetails: ProfileDetails) {
-        profileDetails?.apply {
+        profileDetails.apply {
             mProfileBinding?.apply {
                 userName.profileText.text=name
                 userEmail.profileText.text=email
-//                user_phone.profileText.text=name
+    //                user_phone.profileText.text=name
             }
         }
 

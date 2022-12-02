@@ -121,7 +121,7 @@ class SearchFragment : DaggerFragment() {
 
     private fun updateNewsAdapterData(data: List<NewsItem>) {
         listOfNews=data
-        data?.let { bannerAdapter.updateBannerList(it) }
+        data.let { bannerAdapter.updateBannerList(it) }
     }
 
     private fun initNewsAdapterData() {
@@ -182,7 +182,7 @@ class SearchFragment : DaggerFragment() {
     fun filter(text: String) {
         val tempOrders: ArrayList<NewsItem> = ArrayList()
         for (order in listOfNews) {
-            if (order.title?.toLowerCase()?.contains(text.toLowerCase()) == true)
+            if (order.title?.lowercase(Locale.getDefault())?.contains(text.lowercase(Locale.getDefault())) == true)
                 tempOrders.add(order)
         }
 
