@@ -32,16 +32,16 @@ class HomeViewModel @Inject constructor(private val mHomeUserCase: HomeUseCase) 
             }
         }
     }*/
-    val newsResult = MediatorLiveData<Event<com.example.sampleappfortest.common.Result<ArrayList<NewsItem>>>>()
+    val newsResult = MediatorLiveData<Event<com.example.sampleappfortest.common.Result<List<NewsItem>>>>()
 
 
-   /* fun getNewsList(id:IdsResponse) {
+    fun getNewsListFromLocalDb() {
         viewModelScope.launch {
-            newsResult.addSource(mHomeUserCase.getItemFromId(id)) {
+            newsResult.addSource(mHomeUserCase.getItemFromId()) {
                 newsResult.value = Event(it)
             }
         }
-    }*/
+    }
 
     val getCategoryResult =
         MediatorLiveData<Event<com.example.sampleappfortest.common.Result<List<ImageDetails>>>>()

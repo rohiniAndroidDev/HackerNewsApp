@@ -10,7 +10,7 @@ interface HomeLocalDataSource {
 
     suspend fun putIds(list: List<IdModel>)
 
-    suspend fun getNewsList(): List<NewsItem>?
+    suspend fun getNewsList(): List<NewsItem>
     suspend fun storeItemInDb(item: NewsItem)
     suspend fun getNewsById(id:Int):NewsItem?
 

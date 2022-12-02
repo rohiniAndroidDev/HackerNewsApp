@@ -62,18 +62,12 @@ class NewsListAdapter constructor(private val listener: NewsItemClickListener) :
             }
         }
 
-        fun bind(story: NewsItem) {
+        fun bind(newsItem: NewsItem) {
             binding.apply {
-                authorNameTextView.text = "By: ${story.by}"
-                titleTextView.text = story.title
-//        commentsImageView.icon =
-//          AppIcons.fawComment(binding.root.context)
-//        scoreImageView.icon =
-//          AppIcons.fawHeart(binding.root.context)
-//                scoreTextView.text = story.score.toString()
-                commentsCount.text = story.kids?.size.toString()
-//                storyTypeTextView.text = story.storyType.string.uppercase()
-                timeTextView.text = AppDateUtil.whenDidThisHappen(story.time)
+                authorNameTextView.text = "By: ${newsItem.by}"
+                titleTextView.text = newsItem.title
+                commentsCount.text = newsItem.kids?.size.toString()
+                timeTextView.text = AppDateUtil.whenDidThisHappen(newsItem.time)
             }
         }
     }

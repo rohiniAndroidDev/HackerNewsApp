@@ -140,4 +140,20 @@ class HomeRemoteDataSourceImpl @Inject constructor(
         }
     }
 
+    override suspend fun getItemForId(id: Int): NewsItem = withContext(context) {
+        val response = service.getItemFromId(id)
+        if (response.isSuccessful) {
+            response.body() ?: throw Exception("no response")
+        } else if (response.errorBody() != null) {
+            val converter: Converter<ResponseBody, LoginResponse> =
+                RetrofitClientInstance.retrofitInstance!!.responseBodyConverter(
+                    ImageDetails::class.java, arrayOfNulls<Annotation>(0)
+                )
+
+            val error = converter.convert(response.errorBody())
+            throw Exception(error?.message.toString())
+        } else
+            throw Exception(response.code().toString())
+    }
+
 }

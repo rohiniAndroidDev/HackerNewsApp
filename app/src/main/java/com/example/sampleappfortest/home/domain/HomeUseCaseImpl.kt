@@ -20,8 +20,8 @@ class HomeUseCaseImpl @Inject constructor(var mRepository: HomeRepository) : Hom
 
 
 
-    override suspend fun getItemFromId(id: IdsResponse): LiveData<Result<ArrayList<NewsItem>>> {
-        return mRepository.getItemFromIds(id)
+    override suspend fun getItemFromId(): LiveData<Result<List<NewsItem>>> {
+        return mRepository.getItemFromIds()
     }
 
     override fun invoke(idsList: List<Int>): Flow<PagingData<NewsItem>> {

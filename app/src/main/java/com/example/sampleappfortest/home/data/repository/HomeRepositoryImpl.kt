@@ -1,5 +1,6 @@
 package com.example.sampleappfortest.home.data.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import androidx.paging.Pager
@@ -92,26 +93,34 @@ class HomeRepositoryImpl @Inject constructor(var mRemoteDataSource: HomeRemoteDa
 
 
 
-    override suspend fun getItemFromIds(id: IdsResponse): LiveData<Result<ArrayList<NewsItem>>> {
+    override suspend fun getItemFromIds(): LiveData<Result<List<NewsItem>>> {
         return liveData {
             emit(com.example.sampleappfortest.common.Result.loading())
             try {
-                var responseList= arrayListOf<NewsItem>()
+                var responseList= mutableListOf<NewsItem>()
 
-                if(id.isEmpty())
-                {
-                    emit(com.example.sampleappfortest.common.Result.success(responseList))
+//                todo need to fix this
+                   /* val newslist=fetchItemByIdFromLocalDb().toMutableList()
+                    newslist?.forEach {
+                        responseList.add(it)
+                    }*/
+                //now search only works for 20 items
+                    if(responseList.isEmpty()) {
+                        val localResponse: List<IdModel> = fetchIdsFromDb()
 
-                }else
-                {
-                    for(i in id) {
-                        val response = mRemoteDataSource.getItemFromId(i)
-//                        storeItemInDb(response)
-//                        responseList.add(response)
+                        val idsList = IdsResponse()
+
+                        localResponse.forEach { item ->
+                            idsList.add(item.id)
+                        }
+                        for (i in idsList.take(20)) {
+                            val response = mRemoteDataSource.getItemForId(i)
+                            storeItemInDb(response)
+                            responseList.add(response)
+                        }
                     }
                     emit(com.example.sampleappfortest.common.Result.success(responseList))
 
-                }
 
             } catch (exception: Exception) {
                 emit(
@@ -148,7 +157,7 @@ class HomeRepositoryImpl @Inject constructor(var mRemoteDataSource: HomeRemoteDa
     }
 
 
-    override suspend fun fetchItemByIdFromLocalDb(id:Int): List<NewsItem>? {
+    override suspend fun fetchItemByIdFromLocalDb(): List<NewsItem> {
         return mLocalDataSource.getNewsList()
     }
 

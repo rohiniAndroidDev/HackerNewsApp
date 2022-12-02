@@ -53,4 +53,13 @@
     <string name="retry">Retry</string>
     <string name="TopStories_cc">Top Stories</string>
 
+    <!--search related strings-->
+    <string name="no_search_desc_cc">"We couldn't find what you are looking at. \n  Please try again or search manually."</string>
+    <string name="no_search_results_found">No search results found</string>
+    <string name="search_news_here">Search news here</string>
+    <string name="continue_cc">Continue</string>
+    <string name="recent_suggestion_cc">Recent Search History</string>
+
+
+
 </resources>

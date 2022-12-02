@@ -33,6 +33,10 @@
     <color name="colorGrayShade2">#f9f9f9</color>
     <color name="colorGrayShade3">#747272</color>
     <color name="ColorBlueShade3">#041e5a</color>
+    <color name="ColorPrimaryNew">#5333FF</color>
+    <color name="news_search_hint_color">#999999</color>
+
+    <color name="gray_new">#e6e6e6</color>
 
 
 

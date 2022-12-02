@@ -12,13 +12,13 @@ interface HomeRepository {
     fun getImages(): LiveData<Result<List<ImageDetails>>>
 //     suspend fun getTopNewsStoriesItemIds(): LiveData<Result<IdsResponse>>
     suspend fun getNewsStoriesItemIds(isRetry:Boolean): ApiResult<List<Int>>
-     suspend fun getItemFromIds(id: IdsResponse): LiveData<Result<ArrayList<NewsItem>>>
+     suspend fun getItemFromIds(): LiveData<Result<List<NewsItem>>>
      suspend fun getItemFromId(id: Int): ApiResult<NewsItem>
 
     suspend fun storeIdsInDb(list: List<IdModel>)
     suspend fun fetchIdsFromDb(): List<IdModel>
 //    news related functions
- suspend fun fetchItemByIdFromLocalDb(id:Int): List<NewsItem>?
+ suspend fun fetchItemByIdFromLocalDb(): List<NewsItem>
 
 
  suspend fun storeItemInDb(item: NewsItem)

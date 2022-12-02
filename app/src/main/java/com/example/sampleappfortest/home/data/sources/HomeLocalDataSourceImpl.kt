@@ -17,7 +17,7 @@ class HomeLocalDataSourceImpl  @Inject constructor(private val idsDao: IdDao,pri
         idsDao.insertAll(list)
     }
 
-    override suspend fun getNewsList(): List<NewsItem>? {
+    override suspend fun getNewsList(): List<NewsItem> {
         return newsDao.getNewsList()
     }
 

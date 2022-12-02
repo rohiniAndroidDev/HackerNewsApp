@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 interface HomeUseCase {
     suspend fun getProfile(): LiveData<com.example.sampleappfortest.common.Result<ProfileDetails>>
     suspend fun getImages(): LiveData<com.example.sampleappfortest.common.Result<List<ImageDetails>>>
-    suspend fun getItemFromId(id: IdsResponse): LiveData<com.example.sampleappfortest.common.Result<ArrayList<NewsItem>>>
+    suspend fun getItemFromId(): LiveData<com.example.sampleappfortest.common.Result<List<NewsItem>>>
 
     fun invoke(idsList: List<Int>): Flow<PagingData<NewsItem>>
     suspend fun invoke(isRetry:Boolean): com.example.sampleappfortest.common.ApiResult<List<Int>>

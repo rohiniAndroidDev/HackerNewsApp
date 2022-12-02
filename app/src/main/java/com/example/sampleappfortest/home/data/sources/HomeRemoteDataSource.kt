@@ -18,6 +18,7 @@ interface HomeRemoteDataSource {
     suspend fun getTopNewsStoriesItemIdsApiCall(): ResponseWrapper<IdsResponse>
     suspend fun getItemFromIdApiCall(id: Int): ResponseWrapper<NewsItem?>
     suspend fun getItemFromId(id: Int): ApiResult<NewsItem>
+    suspend fun getItemForId(id: Int): NewsItem
 
 
 }
