@@ -25,23 +25,23 @@ class HomeViewModel @Inject constructor(private val mHomeUserCase: HomeUseCase) 
     val newsIDsResult =
         MediatorLiveData<Event<com.example.sampleappfortest.common.Result<IdsResponse>>>()
 
-    fun getNewsIds() {
+    /*fun getNewsIds() {
         viewModelScope.launch {
             newsIDsResult.addSource(mHomeUserCase.getTopNewsStoriesItemIds()) {
                 newsIDsResult.value = Event(it)
             }
         }
-    }
+    }*/
     val newsResult = MediatorLiveData<Event<com.example.sampleappfortest.common.Result<ArrayList<NewsItem>>>>()
 
 
-    fun getNewsList(id:IdsResponse) {
+   /* fun getNewsList(id:IdsResponse) {
         viewModelScope.launch {
             newsResult.addSource(mHomeUserCase.getItemFromId(id)) {
                 newsResult.value = Event(it)
             }
         }
-    }
+    }*/
 
     val getCategoryResult =
         MediatorLiveData<Event<com.example.sampleappfortest.common.Result<List<ImageDetails>>>>()
@@ -61,10 +61,10 @@ class HomeViewModel @Inject constructor(private val mHomeUserCase: HomeUseCase) 
         viewModelScope.launch {
             postLoading()
             val response = mHomeUserCase.invoke(isRetry)
-            if (response.status==Status.SUCCESS)
-                postSuccess(response.data!!, "Demo", FETCHED_IDS)
+            if (response.success)
+                postSuccess(response.result!!, response.message,FETCHED_IDS)
             else
-                postError("Error", API_ERROR, null)
+                postError(response.message, API_ERROR, null)
         }
     }
 

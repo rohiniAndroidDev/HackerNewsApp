@@ -33,6 +33,9 @@ class HomeLocalDataSourceImpl  @Inject constructor(private val idsDao: IdDao,pri
        return newsDao.insertNewsItem(item)
     }
 
+    override suspend fun getNewsById(id: Int): NewsItem? {
+        return newsDao.getNewsByID(id)
+    }
 
 
 }

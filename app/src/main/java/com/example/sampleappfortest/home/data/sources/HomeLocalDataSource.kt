@@ -12,5 +12,6 @@ interface HomeLocalDataSource {
 
     suspend fun getNewsList(): List<NewsItem>?
     suspend fun storeItemInDb(item: NewsItem)
+    suspend fun getNewsById(id:Int):NewsItem?
 
 }

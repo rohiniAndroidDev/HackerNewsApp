@@ -4,10 +4,7 @@ package com.example.sampleappfortest.home.presentation.ui.paging
 import androidx.lifecycle.LiveData
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.sampleappfortest.common.MAX_ITEMS_LIMIT
-import com.example.sampleappfortest.common.Result
-import com.example.sampleappfortest.common.START_PAGE_INDEX
-import com.example.sampleappfortest.common.Status
+import com.example.sampleappfortest.common.*
 import com.example.sampleappfortest.home.model.IdsResponse
 import com.example.sampleappfortest.home.model.NewsItem
 import kotlinx.coroutines.Dispatchers
@@ -17,7 +14,7 @@ import kotlinx.coroutines.withContext
 import kotlin.reflect.KSuspendFunction1
 
 class NewsPagingSource(
-    private val getItem:suspend (Int)->Result<NewsItem>,
+    private val getItem:suspend (Int)->ApiResult<NewsItem>,
     private val ids: List<Int>
 ) :
     PagingSource<Int, NewsItem>() {
@@ -64,8 +61,8 @@ class NewsPagingSource(
 //          delay(3000)
                 val responses = runningTasks.awaitAll()
                 responses.forEach { (_, response) ->
-                    if (response.status== Status.SUCCESS) {
-                        list.add(response.data!!)
+                    if (response.success) {
+                        list.add(response.result!!)
                     }
                 }
             }

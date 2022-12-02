@@ -7,6 +7,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.RemoteMediator
 import com.example.sampleappfortest.common.*
+import com.example.sampleappfortest.home.data.network.ResponseWrapper
 import com.example.sampleappfortest.home.data.sources.HomeLocalDataSource
 import com.example.sampleappfortest.home.data.sources.HomeRemoteDataSource
 import com.example.sampleappfortest.home.model.*
@@ -54,76 +55,41 @@ class HomeRepositoryImpl @Inject constructor(var mRemoteDataSource: HomeRemoteDa
         }
     }
 
-    override fun getTopNewsStoriesItemIds(): LiveData<Result<IdsResponse>> {
-        return liveData {
-            emit(com.example.sampleappfortest.common.Result.loading())
-            try {
-
-                val response = mRemoteDataSource.getTopNewsStoriesItemIds()
-                if(response.isNullOrEmpty())
-                {
-                    val localResponse: List<IdModel> = fetchIdsFromDb()
-                    localResponse.forEach { item ->
-                        idsList.add(item.id)
-                    }
-                }else {
-                    val list = mutableListOf<IdModel>()
-                    val currentTimestamp = System.currentTimeMillis()
-                    for (i in response) {
-                        idsList.add(i)
-                        list.add(IdModel(i, currentTimestamp))
-                    }
-                    storeIdsInDb(list)
-                }
-                emit(com.example.sampleappfortest.common.Result.success(idsList))
-
-            } catch (exception: Exception) {
-                emit(
-                    com.example.sampleappfortest.common.Result.error(
-                        exception.message ?: "",
-                        null
-                    )
-                )
-            }
-        }
-    }
-
-override suspend fun getNewsStoriesItemIds(isretry:Boolean): Result<List<Int>> {
-    val networkResponse = if(!isretry) {
-       if (AppCache.canFetch("Top")) {
-            Result.success(mRemoteDataSource.getTopNewsStoriesItemIds())
+    override suspend fun getNewsStoriesItemIds(isRetry: Boolean): ApiResult<List<Int>> {
+        val networkResponse = if (AppCache.canFetch("Top")) {
+            mRemoteDataSource.getTopNewsStoriesItemIds()
         } else {
-            Result.success(IdsResponse())
+            ApiResult.OK("", IdsResponse())
         }
-    }else
-    {
-        Result.success(mRemoteDataSource.getTopNewsStoriesItemIds())
-    }
         val localResponse: List<IdModel> = fetchIdsFromDb()
 
-        val idsList = mutableSetOf<Int>()
+        val idsList = IdsResponse()
 
         localResponse.forEach { item ->
             idsList.add(item.id)
         }
 
-        if (networkResponse.status==Status.SUCCESS && !networkResponse.data.isNullOrEmpty()) {
+        if (networkResponse.success && networkResponse.result != null) {
             val list = mutableListOf<IdModel>()
             val currentTimestamp = System.currentTimeMillis()
-            for (i in networkResponse.data) {
+            for (i in networkResponse.result) {
                 idsList.add(i)
-                list.add(IdModel(i, currentTimestamp))
+                list.add(IdModel(i,  currentTimestamp))
             }
             storeIdsInDb(list)
-            return Result.success(idsList.toList())
+            return ApiResult.OK(networkResponse.message, idsList)
         }
 
         return if (idsList.size == 0) {
-            Result.error("demo",null)
+            ApiResult.ERROR(networkResponse.message)
         } else {
-            Result.success(idsList.toList())
+            ApiResult.OK("Fetched data from cache", idsList)
         }
     }
+
+
+
+
 
 
     override suspend fun getItemFromIds(id: IdsResponse): LiveData<Result<ArrayList<NewsItem>>> {
@@ -140,8 +106,8 @@ override suspend fun getNewsStoriesItemIds(isretry:Boolean): Result<List<Int>> {
                 {
                     for(i in id) {
                         val response = mRemoteDataSource.getItemFromId(i)
-                        storeItemInDb(response)
-                        responseList.add(response)
+//                        storeItemInDb(response)
+//                        responseList.add(response)
                     }
                     emit(com.example.sampleappfortest.common.Result.success(responseList))
 
@@ -158,25 +124,20 @@ override suspend fun getNewsStoriesItemIds(isretry:Boolean): Result<List<Int>> {
         }
     }
 
-    override suspend fun getItemFromId(id: Int): Result<NewsItem> {
+    override suspend fun getItemFromId(id: Int):  ApiResult<NewsItem> {
 //            emit(com.example.sampleappfortest.common.Result.loading())
-            try {
-                var responseList= arrayListOf<NewsItem>()
+        val fromLocal = getNewsByID(id)
+        if (fromLocal != null) {
+            return ApiResult.OK(res = fromLocal)
+        }
 
-                        val response = mRemoteDataSource.getItemFromId(id)
-                        storeItemInDb(response)
-                        responseList.add(response)
-                   return  com.example.sampleappfortest.common.Result.success(response)
+        val fromNetwork = mRemoteDataSource.getItemFromId(id)
+        if (fromNetwork.success)
+            storeItemInDb(fromNetwork.result!!)
 
+        return fromNetwork
+        }
 
-            } catch (exception: Exception) {
-                return com.example.sampleappfortest.common.Result.error(
-                        exception.message ?: "",
-                        null
-                    )
-
-            }
-    }
 
     override suspend fun storeIdsInDb(list: List<IdModel>) {
         mLocalDataSource.putIds(list)
@@ -187,7 +148,7 @@ override suspend fun getNewsStoriesItemIds(isretry:Boolean): Result<List<Int>> {
     }
 
 
-    override suspend fun fetchItemByIdFromLocalDb(): List<NewsItem>? {
+    override suspend fun fetchItemByIdFromLocalDb(id:Int): List<NewsItem>? {
         return mLocalDataSource.getNewsList()
     }
 
@@ -206,6 +167,10 @@ override suspend fun getNewsStoriesItemIds(isretry:Boolean): Result<List<Int>> {
             ),
             pagingSourceFactory = { NewsPagingSource(::getItemFromId, idsList) }
         ).flow
+    }
+
+    override suspend fun getNewsByID(id: Int): NewsItem? {
+      return mLocalDataSource.getNewsById(id)
     }
 
 }

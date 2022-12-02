@@ -2,6 +2,7 @@ package com.example.sampleappfortest.home.domain
 
 import androidx.lifecycle.LiveData
 import androidx.paging.PagingData
+import com.example.sampleappfortest.common.ApiResult
 import com.example.sampleappfortest.common.Result
 import com.example.sampleappfortest.home.data.repository.HomeRepository
 import com.example.sampleappfortest.home.model.*
@@ -17,9 +18,7 @@ class HomeUseCaseImpl @Inject constructor(var mRepository: HomeRepository) : Hom
         return mRepository.getImages()
     }
 
-    override suspend fun getTopNewsStoriesItemIds(): LiveData<Result<IdsResponse>> {
-        return mRepository.getTopNewsStoriesItemIds()
-    }
+
 
     override suspend fun getItemFromId(id: IdsResponse): LiveData<Result<ArrayList<NewsItem>>> {
         return mRepository.getItemFromIds(id)
@@ -29,7 +28,7 @@ class HomeUseCaseImpl @Inject constructor(var mRepository: HomeRepository) : Hom
             return mRepository.getPaginatedFlow(idsList)
     }
 
-    override suspend fun invoke(isretry:Boolean): Result<List<Int>> {
+    override suspend fun invoke(isretry:Boolean): ApiResult<List<Int>> {
         return mRepository.getNewsStoriesItemIds(isretry)
     }
 

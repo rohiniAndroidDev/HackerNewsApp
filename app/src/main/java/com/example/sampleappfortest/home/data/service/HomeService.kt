@@ -21,7 +21,7 @@ interface HomeService {
      fun getTopNewsStoriesItemIds(): Deferred<Response<IdsResponse>>
 
     @GET("item/{id}.json")
-     fun getItemFromId(@Path("id") id: Int): Deferred<Response<NewsItem>>
+     suspend fun getItemFromId(@Path("id") id: Int): Response<NewsItem>
 
 
 }

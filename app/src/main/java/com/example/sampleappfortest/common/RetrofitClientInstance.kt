@@ -15,6 +15,7 @@ object RetrofitClientInstance {
             if (retrofit == null) {
                 retrofit = Retrofit.Builder()
                     .addCallAdapterFactory(CoroutineCallAdapterFactory())
+
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create(GsonInstance.instance()))
                     .client(provideOkHttpClient())

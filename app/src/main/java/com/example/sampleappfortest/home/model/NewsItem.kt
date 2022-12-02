@@ -36,6 +36,6 @@ data class NewsItem (@PrimaryKey @SerializedName("id") val id: Int,
     }
 
     override fun toString(): String {
-        return "StoryModel{id: $id, title: $title, url: $url, type: $type}"
+        return "NewsItem{id: $id, title: $title, url: $url, type: $type}"
     }
 }

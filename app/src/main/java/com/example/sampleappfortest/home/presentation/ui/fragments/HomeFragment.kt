@@ -35,7 +35,6 @@ class HomeFragment : DaggerFragment(), NewsItemClickListener {
     var mHomeBinding: FragmentHomeBinding? = null
     private lateinit var sharedPrefUtil: SharedPreferences
 
-    //    lateinit var customProgress: CustomProgress
     private var uploadedImagesAdapter: UploadedImagesAdapter? = null
     private lateinit var uploadedNewsAdapter: NewsListAdapter
     private val ASSIGNMENTDATA: String? = "AssignmentData"
@@ -66,7 +65,6 @@ class HomeFragment : DaggerFragment(), NewsItemClickListener {
         sharedPrefUtil =
             PreferenceManager.getDefaultSharedPreferences(requireActivity().applicationContext)
         getValueFromPreference()
-//        customProgress = CustomProgress(requireContext())
 
 
         // Inflate the layout for this fragment
@@ -80,9 +78,8 @@ class HomeFragment : DaggerFragment(), NewsItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initAdapter()
-
         initObserver()
-        mHomeViewModel.getNewsIds()
+//        mHomeViewModel.getNewsIds()
 
     }
 
@@ -90,12 +87,7 @@ class HomeFragment : DaggerFragment(), NewsItemClickListener {
     private fun initAdapter() {
         uploadedImagesAdapter = UploadedImagesAdapter(arrayListOf())
         val mLayoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
-        /* mHomeBinding?.assignmentList?.apply {
-             adapter=uploadedImagesAdapter
-             layoutManager=mLayoutManager
-         } */
         uploadedNewsAdapter = NewsListAdapter(this)
-//        val mLayoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
         mHomeBinding?.assignmentList?.apply {
             setHasFixedSize(true)
             adapter = uploadedNewsAdapter.withLoadStateHeaderAndFooter(
